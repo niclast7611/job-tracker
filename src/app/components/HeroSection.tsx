@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 import { FaRegStar } from "react-icons/fa";
 
@@ -20,9 +21,13 @@ const HeroSection = () => {
               track your progress with our intelligent platform.
             </p>
             <div className="flex items-center space-x-4">
-              <button className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700">
+              <Link
+                href={"/auth/sign-up"}
+                className="px-8 py-4 bg-blue-600 text-white rounded-lg hover:bg-blue-700"
+              >
                 Start Free Trial
-              </button>
+              </Link>
+
               <button className="px-8 py-4 text-gray-600 hover:text-gray-900">
                 See How It Works
               </button>
