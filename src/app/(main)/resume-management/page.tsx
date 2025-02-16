@@ -1,5 +1,5 @@
-import { ChevronDownIcon, PlusIcon } from "@heroicons/react/24/outline";
 import React from "react";
+import { FaChevronDown, FaPlus } from "react-icons/fa";
 
 const ResumeManagementPage = () => {
   return (
@@ -9,7 +9,7 @@ const ResumeManagementPage = () => {
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold">My Resumes</h2>
           <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
-            <PlusIcon className="w-5 h-5 mr-2" />
+            <FaPlus className="w-5 h-5 mr-2" />
             New Resume
           </button>
         </div>
@@ -24,7 +24,7 @@ const ResumeManagementPage = () => {
                   <p className="text-gray-600">Last modified: date</p>
                 </div>
                 <button className="p-2">
-                  <ChevronDownIcon className="w-5 h-5" />
+                  <FaChevronDown className="w-5 h-5" />
                 </button>
               </div>
               <div className="h-40 bg-gray-100 rounded-lg mb-4" />

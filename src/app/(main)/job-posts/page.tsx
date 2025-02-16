@@ -1,5 +1,5 @@
-import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
 import React from "react";
+import { CiSearch } from "react-icons/ci";
 
 const JobPostPage = () => {
   return (
@@ -9,7 +9,7 @@ const JobPostPage = () => {
         <div className="bg-white p-4 rounded-lg shadow-sm mb-6">
           <div className="flex gap-4">
             <div className="flex-1 flex items-center border rounded-lg px-4 py-2">
-              <MagnifyingGlassIcon className="w-5 h-5 text-gray-400 mr-2" />
+              <CiSearch className="w-5 h-5 text-gray-400 mr-2" />
               <input
                 className="w-full outline-none"
                 placeholder="Search jobs..."

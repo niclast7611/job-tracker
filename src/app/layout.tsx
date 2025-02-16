@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import { Providers } from "@/lib/providers";
+import LandingPageNavBar from "./components/LandingPageNavBar";
+import FooterSection from "./components/FooterSection";
 
 export const metadata: Metadata = {
   title: "Resume Tailor",
@@ -16,7 +18,11 @@ export default function RootLayout({
   return (
     <html lang="en">
       <Providers>
-        <body>{children}</body>
+        <body>
+          <LandingPageNavBar />
+          {children}
+          <FooterSection />
+        </body>
       </Providers>
     </html>
   );

@@ -1,11 +1,9 @@
 import LogoutButton from "@/components/LogoutButton";
-import {
-  BellIcon,
-  Cog6ToothIcon,
-  UserCircleIcon,
-} from "@heroicons/react/24/outline";
+
 import Link from "next/link";
 import React from "react";
+import { FaRegBell, FaRegUser } from "react-icons/fa";
+import { IoSettingsOutline } from "react-icons/io5";
 
 const Navbar = () => {
   return (
@@ -29,9 +27,9 @@ const Navbar = () => {
             </div>
           </div>
           <div className="flex items-center space-x-4">
-            <BellIcon className="w-5 h-5" />
-            <UserCircleIcon className="w-5 h-5" />
-            <Cog6ToothIcon className="w-5 h-5" />
+            <FaRegBell className="w-5 h-5" />
+            <FaRegUser className="w-5 h-5" />
+            <IoSettingsOutline className="w-5 h-5" />
             <LogoutButton />
           </div>
         </div>

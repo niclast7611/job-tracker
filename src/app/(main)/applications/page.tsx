@@ -1,10 +1,8 @@
 import React from "react";
 import ApplicationCard from "./components/ApplicationCard";
-import {
-  FunnelIcon,
-  MagnifyingGlassIcon,
-  PlusIcon,
-} from "@heroicons/react/24/outline";
+import { FaPlus } from "react-icons/fa";
+import { CiSearch } from "react-icons/ci";
+import { IoFunnelOutline } from "react-icons/io5";
 
 const ApplicationsKanban = () => {
   // Sample data structure
@@ -87,7 +85,7 @@ const ApplicationsKanban = () => {
         <div className="flex justify-between items-center mb-6">
           <h1 className="text-2xl font-bold">Job Applications</h1>
           <button className="flex items-center px-4 py-2 bg-blue-600 text-white rounded-lg">
-            <PlusIcon className="w-5 h-5 mr-2" />
+            <FaPlus className="w-5 h-5 mr-2" />
             Add Application
           </button>
         </div>
@@ -95,14 +93,14 @@ const ApplicationsKanban = () => {
         {/* Search and Filters */}
         <div className="flex gap-4 mb-8">
           <div className="flex-1 flex items-center bg-white px-4 py-2 rounded-lg shadow-sm">
-            <MagnifyingGlassIcon className="w-5 h-5 text-gray-400 mr-2" />
+            <CiSearch className="w-5 h-5 text-gray-400 mr-2" />
             <input
               className="w-full outline-none"
               placeholder="Search applications..."
             />
           </div>
           <button className="flex items-center px-4 py-2 bg-white rounded-lg shadow-sm">
-            <FunnelIcon className="w-5 h-5 mr-2" />
+            <IoFunnelOutline className="w-5 h-5 mr-2" />
             Filters
           </button>
         </div>
