@@ -3,7 +3,7 @@ import { FaChevronDown, FaPlus } from "react-icons/fa";
 
 const ResumeManagementPage = () => {
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Header */}
         <div className="flex justify-between items-center mb-6">

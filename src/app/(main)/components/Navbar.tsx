@@ -29,7 +29,9 @@ const Navbar = () => {
           <div className="flex items-center space-x-4">
             <FaRegBell className="w-5 h-5" />
             <FaRegUser className="w-5 h-5" />
-            <IoSettingsOutline className="w-5 h-5" />
+            <Link href="/settings">
+              <IoSettingsOutline className="w-5 h-5" />
+            </Link>
             <LogoutButton />
           </div>
         </div>

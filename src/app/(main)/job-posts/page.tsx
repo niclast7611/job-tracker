@@ -3,7 +3,7 @@ import { CiSearch } from "react-icons/ci";
 
 const JobPostPage = () => {
   return (
-    <div>
+    <div className="min-h-screen bg-gray-50">
       <div className="max-w-7xl mx-auto px-4 py-8">
         {/* Search Bar */}
         <div className="bg-white p-4 rounded-lg shadow-sm mb-6">
