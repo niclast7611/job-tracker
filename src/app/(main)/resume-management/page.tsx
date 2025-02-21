@@ -2,9 +2,11 @@
 import React, { useEffect, useState } from "react";
 import { FaPlus } from "react-icons/fa";
 import ResumeCard from "./_components/ResumeCard";
+import { Resume } from "@prisma/client";
+import { PresignedUrlResponse } from "@/lib/types";
 
 const ResumeManagementPage = () => {
-  const [resumes, setResumes] = useState([]);
+  const [resumes, setResumes] = useState<Resume[]>([]);
 
   const uploadFile = async (file: File) => {
     try {
@@ -19,7 +21,8 @@ const ResumeManagementPage = () => {
           contentType: file.type,
         }),
       });
-      const { url, fields } = await presignedResponse.json();
+      const { url, fields } =
+        (await presignedResponse.json()) as PresignedUrlResponse;
 
       const formData = new FormData();
       Object.entries(fields).forEach(([key, value]) => {

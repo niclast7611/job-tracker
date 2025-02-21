@@ -1,11 +1,13 @@
+import { Resume } from "@/lib/types";
 import React, { useState } from "react";
 import { FaChevronDown, FaChevronUp } from "react-icons/fa";
 
 type Props = {
-  resume: any;
+  resume: Resume;
 };
 
-const formatDate = (dateString: string) => {
+const formatDate = (dateString?: string | Date) => {
+  if (!dateString) return "";
   return new Date(dateString).toLocaleDateString("en-US", {
     year: "numeric",
     month: "short",
@@ -22,7 +24,7 @@ const ResumeCard = ({ resume }: Props) => {
         <div>
           <h3 className="font-bold">{resume.title}</h3>
           <p className="text-gray-600">
-            Last modified: {formatDate(resume.updatedAt)}
+            Last modified: {formatDate(resume?.updatedAt || "")}
           </p>
         </div>
         <button
@@ -38,13 +40,13 @@ const ResumeCard = ({ resume }: Props) => {
       </div>
 
       <div className="h-40 bg-gray-100 rounded-lg mb-4 overflow-hidden">
-        {/* {viewUrl && (
+        {resume.fileUrl && (
           <iframe
-            src={`${viewUrl}#view=FitH`}
+            src={`${resume.fileUrl}#view=FitH`}
             className="w-full h-full"
             title={`Preview of ${resume.title}`}
           />
-        )} */}
+        )}
       </div>
 
       <div className="flex gap-2">
