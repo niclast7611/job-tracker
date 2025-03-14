@@ -29,6 +29,10 @@ export async function POST(request: NextRequest) {
       Conditions: [
         ["content-length-range", 0, 10485760], // up to 10 MB
       ],
+       Fields: {
+        "Content-Type":"application/pdf",
+        "Content-Disposition": "inline"  // This is key for previewing instead of downloading
+      },
       Expires: 600, // 10 minutes
     });
 
