@@ -1,11 +1,12 @@
 import { Resume } from "@/lib/types";
 import React from "react";
+import { HiDotsVertical } from "react-icons/hi";
 
 type Props = {
   resume: Resume;
 };
-
-const formatDate = (dateString?: string | Date) => {
+// TODO:TURN INTO HOOK
+export const formatDate = (dateString?: string | Date) => {
   if (!dateString) return "";
   return new Date(dateString).toLocaleDateString("en-US", {
     year: "numeric",
@@ -19,10 +20,15 @@ const ResumeCard = ({ resume }: Props) => {
     <div className="bg-white p-6 rounded-lg shadow-sm">
       <div className="flex justify-between items-start mb-4">
         <div>
-          <h3 className="font-bold">{resume.title}</h3>
+          <h3 className="font-bold truncate max-w-xs">{resume.title}</h3>
           <p className="text-gray-600">
             Last modified: {formatDate(resume?.updatedAt || "")}
           </p>
+        </div>
+        <div>
+          <button>
+            <HiDotsVertical />
+          </button>
         </div>
       </div>
 
