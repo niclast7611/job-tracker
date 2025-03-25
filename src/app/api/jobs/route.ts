@@ -73,32 +73,44 @@ To filter on more than one job type, please delimit by comma with no space, like
 BETA Feature.Filter on jobs that mention Visa sponsorship within the job description.
 */
 
-
-const url = process.env.JOB_SEARCH_API_URL || ''
+const url = process.env.JOB_SEARCH_API_URL || "";
 const options = {
-    method: 'GET',
-    headers: {
-        'x-rapidapi-key': process.env.RAPID_API_KEY || '',
-        'x-rapidapi-host': process.env.RAPID_API_HOST || '',
-    }
+  method: "POST",
+  headers: {
+    "x-rapidapi-key": process.env.JOB_SEARCH_API_KEY || "",
+  },
+  body: JSON.stringify({
+    page: 0,
+    limit: 10,
+    posted_at_max_age_days: 15,
+    order_by: [
+      {
+        desc: true,
+        field: "date_posted",
+      },
+    ],
+    job_country_code_or: ["US"],
+    include_total_results: false,
+    blur_company_data: false,
+  }),
 };
 
 export async function GET(request: NextRequest) {
   try {
-  //   const response = await fetch(url, options);
-	// const result = await response.text();
-	// console.log(result);
-  // TODO:REMOVE PLACEHOLDER DATA ONCE I UPGRADE THE API SUBSCRIPTION
-  const result = jobs;
-    
+    //   const response = await fetch(url, options);
+    // const result = await response.text();
+    // console.log(result);
+    // TODO:REMOVE PLACEHOLDER DATA ONCE I UPGRADE THE API SUBSCRIPTION
+    const result = jobs;
+
     return NextResponse.json({
-        message: 'Success',
-        data: result,
+      message: "Success",
+      data: result,
     });
   } catch (error) {
-    console.error('Error creating presigned URL:', error);
+    console.error("Error creating presigned URL:", error);
     return NextResponse.json(
-      { error: 'Error creating upload URL' },
+      { error: "Error creating upload URL" },
       { status: 500 }
     );
   }

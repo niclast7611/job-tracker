@@ -6,38 +6,31 @@ import JobCard from "./_components/JobCard";
 import { Job } from "@/lib/types";
 
 const JobPostPage = () => {
-  const [jobs, setJobs] = useState([]);
+  const [jobs, setJobs] = useState<Job[]>([]);
   const [searchTerm, setSearchTerm] = useState("");
   const [showFilters, setShowFilters] = useState(false);
+  const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchJobs = async () => {
       try {
+        setLoading(true);
         const response = await fetch("/api/jobs");
         const data = await response.json();
-        setJobs(data?.data || []);
+        console.log("Fetched jobs data:", data);
+        setJobs(data?.data?.data || []);
       } catch (error) {
         console.error("Error fetching jobs:", error);
         toast.error("Failed to load job listings");
+      } finally {
+        setLoading(false);
       }
     };
 
     fetchJobs();
   }, []);
 
-  // TODO:THIS SHOULD EVENTUALLY WORK
-  // Filter jobs based on search term
-  const filteredJobs = jobs.filter(
-    (job: Job) =>
-      (job.title?.toLowerCase() || "").includes(searchTerm.toLowerCase()) ||
-      (job.organization?.toLowerCase() || "").includes(
-        searchTerm.toLowerCase()
-      ) ||
-      job.locations_derived?.some((loc) =>
-        loc.toLowerCase().includes(searchTerm.toLowerCase())
-      ) ||
-      false
-  );
+  console.log("jobs", jobs);
 
   return (
     <div className="min-h-screen bg-gray-50">
@@ -65,35 +58,33 @@ const JobPostPage = () => {
           {/* Expandable Filters Section */}
           {showFilters && (
             <div className="mt-4 pt-4 border-t border-gray-200 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
-              {/* Salary Range Filter */}
+              {/* Seniority Filter */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Salary Range
+                  Seniority Level
                 </label>
-                {/* TODO:You could dynamically populate this with unique salaries from jobs */}
                 <select className="w-full border rounded-lg px-3 py-2">
-                  <option value="">Any Salary</option>
-                  <option value="50000">$50,000+</option>
-                  <option value="75000">$75,000+</option>
-                  <option value="100000">$100,000+</option>
-                  <option value="150000">$150,000+</option>
+                  <option value="">Any Seniority</option>
+                  <option value="entry_level">Entry Level</option>
+                  <option value="mid_level">Mid Level</option>
+                  <option value="senior">Senior</option>
                 </select>
               </div>
 
-              {/* Location Filter */}
+              {/* Location Type Filter */}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
-                  Location
+                  Work Setup
                 </label>
                 <select className="w-full border rounded-lg px-3 py-2">
-                  <option value="">Any Location</option>
+                  <option value="">Any Setup</option>
                   <option value="remote">Remote</option>
-                  {/* TODO:You could dynamically populate this with unique locations from jobs */}
+                  <option value="hybrid">Hybrid</option>
+                  <option value="on-site">On-site</option>
                 </select>
               </div>
 
               {/* Date Posted Filter */}
-              {/* TODO: You could dynamically populate this with unique dates from jobs*/}
               <div>
                 <label className="block text-sm font-medium text-gray-700 mb-1">
                   Date Posted
@@ -111,21 +102,7 @@ const JobPostPage = () => {
 
         {/* Job Listings */}
         <div className="space-y-4">
-          {filteredJobs.length > 0 ? (
-            filteredJobs.map((job: Job) => <JobCard key={job.id} job={job} />)
-          ) : jobs.length > 0 ? (
-            <div className="text-center py-8 bg-white rounded-lg shadow-sm">
-              <p className="text-gray-600">
-                No jobs match your search criteria.
-              </p>
-              <button
-                className="mt-2 text-blue-600 hover:underline"
-                onClick={() => setSearchTerm("")}
-              >
-                Clear search
-              </button>
-            </div>
-          ) : (
+          {loading ? (
             // Loading state
             <div className="space-y-4">
               {[1, 2, 3].map((i) => (
@@ -150,6 +127,20 @@ const JobPostPage = () => {
                   </div>
                 </div>
               ))}
+            </div>
+          ) : jobs.length > 0 ? (
+            jobs.map((job: Job) => <JobCard key={job.id} job={job} />)
+          ) : (
+            <div className="text-center py-8 bg-white rounded-lg shadow-sm">
+              <p className="text-gray-600">
+                No jobs match your search criteria.
+              </p>
+              <button
+                className="mt-2 text-blue-600 hover:underline"
+                onClick={() => setSearchTerm("")}
+              >
+                Clear search
+              </button>
             </div>
           )}
         </div>
